@@ -1,39 +1,38 @@
-/*  your css code here. If applicable */
 const username = document.getElementById("username");
-		const password = document.getElementById("password");
-		const checkbox = document.getElementById("checkbox");
-		const submitBtn = document.getElementById("submit");
-		const existingBtn = document.getElementById("existing");
+const password = document.getElementById("password");
+const checkbox = document.getElementById("checkbox");
+const submitBtn = document.getElementById("submit");
+const existingBtn = document.getElementById("existing");
 
-		// Load saved data on page load
-		window.onload = function () {
-			const savedUser = localStorage.getItem("username");
-			const savedPass = localStorage.getItem("password");
+window.onload = function () {
+    const savedUser = localStorage.getItem("username");
+    const savedPass = localStorage.getItem("password");
 
-			if (savedUser && savedPass) {
-				existingBtn.style.display = "inline-block";
-				checkbox.checked = true;
-			}
-		};
+    if (savedUser && savedPass) {
+        existingBtn.style.display = "inline-block";
+        checkbox.checked = true;
+    }
+};
 
-		// Submit button
-		submitBtn.addEventListener("click", () => {
+// Submit button
+submitBtn.addEventListener("click", (e) => {
+    e.preventDefault(); // ❗STOP FORM RELOAD (fixes test #2)
 
-			if (checkbox.checked) {
-				localStorage.setItem("username", username.value);
-				localStorage.setItem("password", password.value);
-			} else {
-				localStorage.removeItem("username");
-				localStorage.removeItem("password");
-			}
+    if (checkbox.checked) {
+        localStorage.setItem("username", username.value);
+        localStorage.setItem("password", password.value);
+    } else {
+        localStorage.removeItem("username");
+        localStorage.removeItem("password");
+    }
 
-			alert(`Logged in as ${username.value}`);
-		});
+    alert(`Logged in as ${username.value}`);
+});
 
-		// Existing user login
-		existingBtn.addEventListener("click", () => {
-			const saved = localStorage.getItem("username");
-			if (saved) {
-				alert("Logged in as " + saved);
-			}
-		});
+// Existing user login
+existingBtn.addEventListener("click", () => {
+    const saved = localStorage.getItem("username");
+    if (saved) {
+        alert("Logged in as " + saved);
+    }
+});
