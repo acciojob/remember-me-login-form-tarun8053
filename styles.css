@@ -4,6 +4,7 @@ const checkbox = document.getElementById("checkbox");
 const submitBtn = document.getElementById("submit");
 const existingBtn = document.getElementById("existing");
 
+// Load saved data on page load
 window.onload = function () {
     const savedUser = localStorage.getItem("username");
     const savedPass = localStorage.getItem("password");
@@ -16,8 +17,12 @@ window.onload = function () {
 
 // Submit button
 submitBtn.addEventListener("click", (e) => {
-    e.preventDefault(); // ❗STOP FORM RELOAD (fixes test #2)
+    e.preventDefault(); // Stop form submit reload
 
+    // 🔥 FIRE ALERT FIRST (Cypress requires this to spy on alert())
+    alert(`Logged in as ${username.value}`);
+
+    // 🔥 THEN handle localStorage (important for tests)
     if (checkbox.checked) {
         localStorage.setItem("username", username.value);
         localStorage.setItem("password", password.value);
@@ -25,8 +30,6 @@ submitBtn.addEventListener("click", (e) => {
         localStorage.removeItem("username");
         localStorage.removeItem("password");
     }
-
-    alert(`Logged in as ${username.value}`);
 });
 
 // Existing user login
