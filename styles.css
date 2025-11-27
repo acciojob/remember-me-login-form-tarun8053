@@ -4,7 +4,6 @@ const password = document.getElementById("password");
 const checkbox = document.getElementById("checkbox");
 const existingBtn = document.getElementById("existing");
 
-// Show button if saved credentials exist
 window.onload = function () {
     const savedUser = localStorage.getItem("username");
     const savedPass = localStorage.getItem("password");
@@ -15,14 +14,10 @@ window.onload = function () {
     }
 };
 
-// Handle form submit (NOT button click)
-form.addEventListener("submit", (e) => {
-    e.preventDefault();   // stop refresh always
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    alert("Logged in as " + username.value);
 
-    // Cypress MUST see this alert
-    alert(`Logged in as ${username.value}`);
-
-    // Handle Remember Me
     if (checkbox.checked) {
         localStorage.setItem("username", username.value);
         localStorage.setItem("password", password.value);
@@ -32,10 +27,9 @@ form.addEventListener("submit", (e) => {
     }
 });
 
-// Existing user login
-existingBtn.addEventListener("click", () => {
-    const savedUser = localStorage.getItem("username");
-    if (savedUser) {
-        alert(`Logged in as ${savedUser}`);
+existingBtn.addEventListener("click", function () {
+    const saved = localStorage.getItem("username");
+    if (saved) {
+        alert("Logged in as " + saved);
     }
 });
