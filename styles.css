@@ -4,7 +4,7 @@ const password = document.getElementById("password");
 const checkbox = document.getElementById("checkbox");
 const existingBtn = document.getElementById("existing");
 
-window.onload = function () {
+
     const savedUser = localStorage.getItem("username");
     const savedPass = localStorage.getItem("password");
 
@@ -12,7 +12,7 @@ window.onload = function () {
         existingBtn.style.display = "inline-block";
         checkbox.checked = true;
     }
-};
+
 
 form.addEventListener("submit", function (e) {
     e.preventDefault();
